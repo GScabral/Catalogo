@@ -1,8 +1,11 @@
 const server = require('./src/app.js');
-const {conn}=require('./src/db.js');
+const { conn } = require('./src/db.js');
 
-conn.sync({force:false}).then(()=>{
-    server.listen(3001,()=>{
-        console.log("Server is running on port 3001")
-    })
-})
+// Usa el puerto asignado por Render o un puerto por defecto
+const PORT = process.env.PORT || 3001;
+
+conn.sync({ force: false }).then(() => {
+    server.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+});
