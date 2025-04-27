@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         precio: {
             type: DataTypes.NUMERIC
         },
-       
+        cantidad: { // Agregamos la definición para el campo 'cantidad'
+            type: DataTypes.INTEGER
+        },
+
         descripcion: {
             type: DataTypes.TEXT
         },
