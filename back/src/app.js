@@ -13,7 +13,7 @@ const server =express();
 server.name="BACKEND";
 
 
-server.use(bodyParser.urlencoded({extended:true,limit:'50mn'}));
+server.use(bodyParser.urlencoded({extended:true,limit:'50mb'}));
 server.use(bodyParser.json({limit:'50mb'}));
 server.use(cookieParser());
 
