@@ -18,7 +18,7 @@ server.use(bodyParser.json({limit:'50mb'}));
 server.use(cookieParser());
 
 server.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "http://localhost:3005");
+    res.header("Access-Control-Allow-Origin", "https://amore-mio.onrender.com");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS,PATCH");
