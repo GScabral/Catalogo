@@ -1,0 +1,127 @@
+.edit-product-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.edit-product-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.success {
+    color: green;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e6ffe6;
+    border: 1px solid #b3e6b3;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffe6e6;
+    border: 1px solid #e6b3b3;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.edit-product-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-product-form label {
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+.edit-product-form input[type="text"],
+.edit-product-form input[type="number"],
+.edit-product-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-product-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.edit-product-form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-product-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.edit-product-form input[type="text"]:focus,
+.edit-product-form input[type="number"]:focus,
+.edit-product-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+
+.product-table {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+  }
+  
+  .product-table th {
+    background-color: #f3f4f6;
+  }
+  
+  .product-table button {
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .product-table button:hover {
+    background-color: #2563eb;
+  }
+  
+  .edit-form {
+    margin-top: 2rem;
+  }
+  
+  .success {
+    color: green;
+    margin-bottom: 1rem;
+  }
+  
