@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
-import reactSWC from '@vitejs/plugin-react-swc'; // O el plugin de React que estés usando
+import react from '@vitejs/plugin-react'; // Cambiado a @vitejs/plugin-react
 
 export default defineConfig({
-  plugins: [reactSWC()], // O tus otros plugins
+  plugins: [react()], // Usa el plugin correcto para React
   server: {
     host: '0.0.0.0', // Asegúrate de tener esto para el despliegue
-    port: 3005,     // El puerto que estés usando
+    port: 3005,       // El puerto que estés usando
     allowedHosts: ['amore-mio.onrender.com'], // Añade tu dominio de Render aquí
   },
 });
