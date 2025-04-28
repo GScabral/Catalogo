@@ -3,6 +3,7 @@ const { Router } = require("express")
 const createProducto = require("../controller/newProducto")
 const editProducto = require("../controller/editProduto")
 const getProducto = require("../controller/getProduto")
+const upload = require("../upload.js")
 
 const router = Router();
 
@@ -21,26 +22,31 @@ router.get("/listaProducto", async (req, res) => {
 })
 
 
-router.post("/ingresarProducto", async (req, res) => {
+// Aquí le dices que primero pase por multer para procesar la imagen
+router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
     try {
-        const data = req.body;
+        const { nombre, descripcion, precio, cantidad } = req.body;
+        const imagen_url = req.file ? req.file.path : null; // multer guarda la imagen en req.file
+
+        const data = { nombre, descripcion, precio, cantidad, imagen_url };
+
         const result = await createProducto(data);
 
-        return res.status(201).json({ newProduct: result.newProduct })
+        return res.status(201).json({ newProduct: result });
     } catch (error) {
-        console.error("error al crea producto", error.message)
+        console.error("error al crear producto:", error.message);
         return res.status(500).json({ error: "Error interno del servidor" });
-
     }
-})
+});
+
 
 
 router.patch("/actualizarProducto/:id", async (req, res) => {
     try {
-        const id= req.params.id;
+        const id = req.params.id;
         const data = req.body;
 
-        const productoActualizado= await editProducto(id,data)
+        const productoActualizado = await editProducto(id, data)
         res.status(200).json(productoActualizado);
     } catch (error) {
         console.error("error al cambiar;", error)

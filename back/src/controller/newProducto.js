@@ -4,7 +4,8 @@ const  {productos:Producto}=require('../db')
 
 const createProducto= async(bodyData)=>{
     try{
-        const {nombre,precio,descripcion,imagen_url,cantidad}=bodyData;
+        const {nombre,precio,descripcion,}=bodyData;
+        const imagen_url = req.file?req.file.path : null
 
 
 

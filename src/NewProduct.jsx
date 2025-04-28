@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {CreateNewProduct} from "./redux/action"
-import "./NewProduct.css"
+import { CreateNewProduct } from "./redux/action";
+import "./NewProduct.css";
 
-const CreateProductForm = ({ onSubmit }) => {
+const CreateProductForm = () => {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         nombre: "",
         descripcion: "",
         precio: "",
-        cantidad: "",
-        imagen_url: ""
+        cantidad: ""
     });
+
+    const [file, setFile] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,9 +23,22 @@ const CreateProductForm = ({ onSubmit }) => {
         });
     };
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(CreateNewProduct(formData))
+        const data = new FormData();
+        data.append('nombre', formData.nombre);
+        data.append('descripcion', formData.descripcion);
+        data.append('precio', formData.precio);
+        data.append('cantidad', formData.cantidad);
+        if (file) {
+            data.append('imagen', file); // aquí enviamos el archivo
+        }
+
+        dispatch(CreateNewProduct(data)); // ahora enviamos FormData
     };
 
     return (
@@ -71,12 +85,11 @@ const CreateProductForm = ({ onSubmit }) => {
                     />
                 </div>
                 <div>
-                    <label>URL de la imagen:</label>
+                    <label>Imagen del producto:</label>
                     <input
-                        type="text"
-                        name="imagen_url"
-                        value={formData.imagen_url}
-                        onChange={handleChange}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
                         required
                     />
                 </div>

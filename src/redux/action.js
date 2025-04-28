@@ -33,23 +33,31 @@ export const getProductos = () => async (dispatch) => {
 }
 
 
-export const CreateNewProduct = (producto) => async (dispatch) => {
-    dispatch({ type: POST_PRODUCTOS_REQUEST })
+export const CreateNewProduct = (productoFormData) => async (dispatch) => {
+    dispatch({ type: POST_PRODUCTOS_REQUEST });
 
     try {
-        const response = await axios.post('https://catalogo-d1xv.onrender.com/productos/ingresarProducto', producto);
+        const response = await axios.post(
+            'https://catalogo-d1xv.onrender.com/productos/ingresarProducto',
+            productoFormData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
+
         dispatch({
             type: POST_PRODUCTOS_SUCCESS,
             payload: response.data,
-        })
+        });
     } catch (error) {
         dispatch({
             type: POST_PRODUCTOS_FAILURE,
             payload: error.message,
-        })
+        });
     }
-}
-
+};
 
 
 export const EditProductAction = (id, producto) => async (dispatch) => {
