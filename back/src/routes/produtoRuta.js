@@ -26,7 +26,7 @@ router.get("/listaProducto", async (req, res) => {
 router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
     try {
         const { nombre, descripcion, precio, cantidad } = req.body;
-        const imagen_url = req.file ? req.file.path : null;
+        const imagen_url = req.file ? `/uploads/${req.file.filename}` : null;
 
         const data = { nombre, descripcion, precio, cantidad, imagen_url };
 

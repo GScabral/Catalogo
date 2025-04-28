@@ -16,7 +16,7 @@ const ListaProductos = () => {
     dispatch(getProductos());
   }, [dispatch]);
 
-console.log(allProductos)
+  console.log(allProductos)
 
   return (
     <div className="catalogo">
@@ -30,7 +30,7 @@ console.log(allProductos)
         <div className="producto" key={producto.id}>
           {/* Imagen del producto */}
           <img
-            src={`https://catalogo-d1xv.onrender.com/${producto.imagen_url.replace('/opt/render/project/src/back/src/', '')}`}
+            src={`https://catalogo-d1xv.onrender.com${producto.imagen_url}`}
             alt={producto.nombre}
             className="producto-imagen"
           />
