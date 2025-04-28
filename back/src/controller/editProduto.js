@@ -3,12 +3,13 @@ const { productos: Producto } = require('../db')
 
 
 
-
 const actualizarProducto = async (id, data) => {
+    if (!data) throw new Error('No se enviaron datos para actualizar');
+
     const { nombre, precio, descripcion, imagen_url, cantidad } = data;
 
-
     const producto = await Producto.findByPk(id);
+    if (!producto) throw new Error('Producto no encontrado');
 
     // Actualiza solo los campos enviados
     if (nombre !== undefined) producto.nombre = nombre;
@@ -20,8 +21,7 @@ const actualizarProducto = async (id, data) => {
     await producto.save();
 
     return producto;
+};
 
-} 
 
-
-module.exports= actualizarProducto;
+module.exports = actualizarProducto;

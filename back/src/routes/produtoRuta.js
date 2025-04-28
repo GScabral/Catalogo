@@ -37,8 +37,11 @@ router.post("/ingresarProducto", async (req, res) => {
 
 router.patch("/actualizarProducto/:id", async (req, res) => {
     try {
-        await editProducto(req.params.id, req.cantidadNueva)
-        res.status(200).json();
+        const id= req.params.id;
+        const data = req.body;
+
+        const productoActualizado= await editProducto(id,data)
+        res.status(200).json(productoActualizado);
     } catch (error) {
         console.error("error al cambiar;", error)
         res.status(500).json({ error: "error al cambiar el producto" })
