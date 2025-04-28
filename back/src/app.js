@@ -17,7 +17,9 @@ server.use(bodyParser.urlencoded({extended:true,limit:'50mb'}));
 server.use(bodyParser.json({limit:'50mb'}));
 server.use(cookieParser());
 
-server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+server.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+
+
 
 server.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "https://amore-mio.onrender.com");
