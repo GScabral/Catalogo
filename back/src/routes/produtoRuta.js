@@ -26,9 +26,8 @@ router.get("/listaProducto", async (req, res) => {
 router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
     try {
         const { nombre, descripcion, precio, cantidad } = req.body;
-        const imagen_url = req.file ? `/uploads/${req.file.filename}` : null;
-        console.log("Nombre del archivo subido:", req.file?.filename); // Verifica el nombre del archivo
-        console.log("Ruta de la imagen guardada en la BD:", imagen_url);
+        const imagen_url = req.file ? req.file.path : null; // Aquí req.file.path trae la URL pública de Cloudinary
+
         const data = { nombre, descripcion, precio, cantidad, imagen_url };
 
         const result = await createProducto(data);
