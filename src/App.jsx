@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom'
-import ListaProductos from './listaProductos';
+import ListaProductos from './ListaProductos';
 import CreateProductForm from './NewProduct'
 import EditProduct from "./EditarProductos.jsx"
 
