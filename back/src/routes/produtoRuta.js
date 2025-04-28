@@ -25,19 +25,19 @@ router.get("/listaProducto", async (req, res) => {
 // Aquí le dices que primero pase por multer para procesar la imagen
 router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
     try {
-        const { nombre, descripcion, precio, cantidad } = req.body;
-        const imagen_url = req.file ? req.file.path : null; // multer guarda la imagen en req.file
-
-        const data = { nombre, descripcion, precio, cantidad, imagen_url };
-
-        const result = await createProducto(data);
-
-        return res.status(201).json({ newProduct: result });
+      const { nombre, descripcion, precio, cantidad } = req.body;
+      const imagen_url = req.file ? req.file.path : null;
+  
+      const data = { nombre, descripcion, precio, cantidad, imagen_url };
+  
+      const result = await createProducto(data);
+  
+      return res.status(201).json({ newProduct: result });
     } catch (error) {
-        console.error("error al crear producto:", error.message);
-        return res.status(500).json({ error: "Error interno del servidor" });
+      console.error("error al crear producto:", error.message);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
-});
+  });
 
 
 

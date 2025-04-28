@@ -2,10 +2,9 @@ const  {productos:Producto}=require('../db')
 
 
 
-const createProducto= async(bodyData)=>{
+const createProducto= async(data)=>{
     try{
-        const {nombre,precio,descripcion,}=bodyData;
-        const imagen_url = req.file?req.file.path : null
+        const { nombre, descripcion, precio, cantidad, imagen_url } = data; // CORREGIDO: también cantidad e imagen_url
 
 
 
