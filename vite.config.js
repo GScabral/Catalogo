@@ -7,5 +7,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0', // Escucha en todas las interfaces
     port: 3005,     // El puerto en el que tu aplicación está sirviendo (coincide con el log)
+   allowedHosts: ['amore-mio.onrender.com'],
   },
 });
