@@ -16,6 +16,9 @@ const ListaProductos = () => {
     dispatch(getProductos());
   }, [dispatch]);
 
+
+  console.log("info:",allProductos)
+
   return (
     <div className="catalogo">
       <h1 className="titulo">Catálogo de Productos</h1>
