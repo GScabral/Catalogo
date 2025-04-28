@@ -3,7 +3,6 @@ const intialState = {
     allProductos: [],
     loading: false, // Estado de carga
     error: null, // Manejo de errores
-
 }
 
 const reducer = (state = intialState, action) => {
@@ -43,24 +42,6 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
-            };
-        case 'PATCH_PRODUCTOS_REQUEST':
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case 'PATCH_PRODUCTOS_SUCCESS':
-            // Encuentra el índice del producto actualizado en el array y lo reemplaza
-            return {
-                ...state,
-                loading: false,
-            };
-        case 'PATCH_PRODUCTOS_FAILURE':
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
             };
         default:
             return state;
