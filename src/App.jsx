@@ -9,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<ListaProductos />} />
-      <Route path='/newProduct/lkmkmlkmsdg/{aknalknans/afdasfasfa' element={<CreateProductForm/>} />
+      <Route path='/newProduct/lkmkmlkmsdg/aknalknans/afdasfasfa' element={<CreateProductForm/>} />
       <Route path='/editProcuto/gasgxzxzhsdg/cxzhzfdhfd/dfjndsjj' element={<EditProduct/>} />
     </Routes>
   );
