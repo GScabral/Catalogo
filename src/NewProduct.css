@@ -66,4 +66,28 @@
       padding: 15px;
     }
   }
+
+  .success-message {
+    color: #4caf50;
+    background-color: #e8f5e9;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  /* Animación de entrada */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
   

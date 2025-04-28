@@ -5,6 +5,8 @@ import "./NewProduct.css";
 
 const CreateProductForm = () => {
     const dispatch = useDispatch();
+    const [success, setSuccess] = useState(false);
+
 
     const [formData, setFormData] = useState({
         nombre: "",
@@ -27,7 +29,7 @@ const CreateProductForm = () => {
         setFile(e.target.files[0]);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
         data.append('nombre', formData.nombre);
@@ -35,17 +37,28 @@ const CreateProductForm = () => {
         data.append('precio', formData.precio);
         data.append('cantidad', formData.cantidad);
         if (file) {
-            data.append('imagen', file); // aquí enviamos el archivo
+            data.append('imagen', file);
         }
 
-
-
-        dispatch(CreateNewProduct(data)); // ahora enviamos FormData
+        try {
+            await dispatch(CreateNewProduct(data)); // ahora enviamos FormData
+            setSuccess(true); // mostrar mensaje de éxito
+            // Limpiar el formulario si quieres
+            setFormData({
+                nombre: "",
+                descripcion: "",
+                precio: "",
+                cantidad: ""
+            });
+            setFile(null);
+        } catch (error) {
+            console.error('Error al crear producto:', error);
+        }
     };
-
     return (
         <div className="create-product-form-container">
             <h1 className="create-product-form-title">Crear Producto</h1>
+            {success && <p className="success-message">¡Producto creado correctamente!</p>}
             <form onSubmit={handleSubmit} className="create-product-form">
                 <div>
                     <label>Nombre:</label>
