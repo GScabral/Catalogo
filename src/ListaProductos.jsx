@@ -30,7 +30,7 @@ const ListaProductos = () => {
         <div className="producto" key={producto.id}>
           {/* Imagen del producto */}
           <img
-            src={`https://amore-mio.onrender.com${producto.imagen_url}`}
+            src={`https://catalogo-d1xv.onrender.com${producto.imagen_url}`}
             alt={producto.nombre}
             className="producto-imagen"
           />
