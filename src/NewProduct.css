@@ -1,68 +1,69 @@
+/* Contenedor principal */
 .create-product-form-container {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.create-product-form-title {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título */
+  .create-product-form-title {
     text-align: center;
-    color: #333;
+    font-size: 2rem;
     margin-bottom: 20px;
-}
-
-.create-product-form {
+    color: #333;
+  }
+  
+  /* Formulario */
+  .create-product-form {
     display: flex;
     flex-direction: column;
-}
-
-.create-product-form>div {
-    margin-bottom: 15px;
-}
-
-.create-product-form label {
-    display: block;
+    gap: 15px;
+  }
+  
+  .create-product-form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-product-form label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
-}
-
-.create-product-form input[type="text"],
-.create-product-form input[type="number"],
-.create-product-form textarea {
-    width: calc(100% - 12px);
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.create-product-form textarea {
+  }
+  
+  .create-product-form input,
+  .create-product-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
     resize: vertical;
-    /* Permite redimensionar verticalmente */
-    min-height: 80px;
-}
-
-.create-product-form button[type="submit"] {
-    background-color: #007bff;
+  }
+  
+  /* Botón */
+  .create-product-form button {
+    background-color: #4caf50;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
     transition: background-color 0.3s ease;
-}
-
-.create-product-form button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Estilos para los mensajes de error (opcional) */
-.create-product-form .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
+  }
+  
+  .create-product-form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .create-product-form-container {
+      margin: 20px;
+      padding: 15px;
+    }
+  }
+  

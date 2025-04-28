@@ -14,7 +14,7 @@ const actualizarProducto = async (id, data) => {
     if (nombre !== undefined) producto.nombre = nombre;
     if (precio !== undefined) producto.precio = precio;
     if (cantidad !== undefined) producto.cantidad = cantidad;
-    if (descripcion !== undefined) producto.descripcion = caracteristicas;
+    if (descripcion !== undefined) producto.descripcion = descripcion;
     if (imagen_url !== undefined) producto.imagen_url = imagen_url;
 
     await producto.save();

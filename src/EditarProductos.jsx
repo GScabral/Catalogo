@@ -19,12 +19,13 @@ const EditProduct = () => {
         imagen_url: ''
     });
     const [success, setSuccess] = useState(false);
+    const [updating, setUpdating] = useState(false);
 
     useEffect(() => {
         dispatch(getProductos());
     }, [dispatch]);
 
-    // Cargar datos del producto cuando cambie el producto seleccionado
+    // Cargar datos del producto cuando se selecciona
     useEffect(() => {
         if (selectedProductId && allProductos.length) {
             const product = allProductos.find(p => p.id === selectedProductId);
@@ -49,18 +50,34 @@ const EditProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!selectedProductId) {
+            console.error('No hay producto seleccionado para editar');
+            return;
+        }
+        setUpdating(true);
         try {
             await dispatch(EditProductAction(selectedProductId, productData));
             setSuccess(true);
-            dispatch(getProductos()); // Refrescamos la lista
+            setSelectedProductId(null);
+            setProductData({
+                nombre: '',
+                descripcion: '',
+                precio: '',
+                cantidad: '',
+                imagen_url: ''
+            });
+            dispatch(getProductos()); // Refrescar lista
         } catch (err) {
             console.error('Error al actualizar producto:', err);
+            alert('Hubo un error al actualizar el producto. Inténtalo de nuevo.');
+        } finally {
+            setUpdating(false);
         }
     };
 
     const handleSelectProduct = (id) => {
         setSelectedProductId(id);
-        setSuccess(false); // Reseteamos el mensaje de éxito al cambiar de producto
+        setSuccess(false); // Resetear mensaje de éxito
     };
 
     return (
@@ -68,7 +85,7 @@ const EditProduct = () => {
             <h2>Lista de Productos</h2>
 
             {loading && <p>Cargando productos...</p>}
-            {error && <p>Error: {error}</p>}
+            {error && <p className="error">Error: {error}</p>}
 
             <table className="product-table">
                 <thead>
@@ -137,7 +154,9 @@ const EditProduct = () => {
                             value={productData.imagen_url}
                             onChange={handleChange}
                         />
-                        <button type="submit">Guardar Cambios</button>
+                        <button type="submit" disabled={updating}>
+                            {updating ? 'Guardando...' : 'Guardar Cambios'}
+                        </button>
                     </form>
                 </div>
             )}
