@@ -13,12 +13,12 @@ const server =express();
 server.name="BACKEND";
 
 
-server.use(bodyParser.urlencoded({extended:true,limit:'50mn'}));
+server.use(bodyParser.urlencoded({extended:true,limit:'50mb'}));
 server.use(bodyParser.json({limit:'50mb'}));
 server.use(cookieParser());
 
 server.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "https://amore-mio.onrender.com");
+    res.header("Access-Control-Allow-Origin", "https://amore-mio.onrender.com/");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS,PATCH");
