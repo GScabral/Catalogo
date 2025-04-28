@@ -27,7 +27,11 @@ const ListaProductos = () => {
       {allProductos.map((producto) => (
         <div className="producto" key={producto.id}>
           {/* Imagen del producto */}
-          <img src={producto.imagen_url} alt={producto.nombre} className="producto-imagen" />
+          <img
+            src={`https://catalogo-d1xv.onrender.com/${producto.imagen_url}`}
+            alt={producto.nombre}
+            className="producto-imagen"
+          />
 
           {/* Información del producto */}
           <div className="producto-info">

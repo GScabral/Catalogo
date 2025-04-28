@@ -39,9 +39,7 @@ const CreateProductForm = () => {
         }
 
 
-        for (let pair of data.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
+
         dispatch(CreateNewProduct(data)); // ahora enviamos FormData
     };
 

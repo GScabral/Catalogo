@@ -35,7 +35,6 @@ export const getProductos = () => async (dispatch) => {
 
 export const CreateNewProduct = (productoFormData) => async (dispatch) => {
     dispatch({ type: POST_PRODUCTOS_REQUEST });
-    console.log(productoFormData)
     try {
         const response = await axios.post(
             'https://catalogo-d1xv.onrender.com/productos/ingresarProducto',
