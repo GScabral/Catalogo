@@ -58,7 +58,7 @@ const CreateProductForm = () => {
     return (
         <div className="create-product-form-container">
             <h1 className="create-product-form-title">Crear Producto</h1>
-            {success && <p className="success-message">¡Producto creado correctamente!</p>}
+            {success && <p className="success-message">¡Producto creado correctamenteee!</p>}
             <form onSubmit={handleSubmit} className="create-product-form">
                 <div>
                     <label>Nombre:</label>
