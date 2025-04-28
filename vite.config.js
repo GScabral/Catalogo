@@ -1,4 +1,3 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import reactSWC from '@vitejs/plugin-react-swc'; // O el plugin de React que estés usando
 
