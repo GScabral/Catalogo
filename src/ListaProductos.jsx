@@ -58,24 +58,25 @@ const ListaProductos = () => {
       {loading && <p>Cargando productos...</p>}
       {error && <p>Error al cargar productos: {error}</p>}
       {productosFiltrados.length === 0 && !loading && <p>No hay productos disponibles.</p>}
-
-      {productosActuales.map((producto) => (
-        <div className="producto" key={producto.id}>
-          <img
-            src={producto.imagen_url}
-            alt={producto.nombre}
-            className="producto-imagen"
-          />
-          <div className="producto-info">
-            <h4>Identificador: {producto.id}</h4>
-            <h3>{producto.nombre}</h3>
-            <p className="descripcion">{producto.descripcion}</p>
-            <p className="detalle">Cantidad: {producto.cantidad}</p>
-            <p className="detalle">Precio: ${producto.precio}</p>
-            <p className="detalle">Categoría: {producto.categoria}</p>
+      <div  className="catalogo-grid">
+        {productosActuales.map((producto) => (
+          <div className="producto" key={producto.id}>
+            <img
+              src={producto.imagen_url}
+              alt={producto.nombre}
+              className="producto-imagen"
+            />
+            <div className="producto-info">
+              <h4>Identificador: {producto.id}</h4>
+              <h3>{producto.nombre}</h3>
+              <p className="descripcion">{producto.descripcion}</p>
+              <p className="detalle">Cantidad: {producto.cantidad}</p>
+              <p className="detalle">Precio: ${producto.precio}</p>
+              <p className="detalle">Categoría: {producto.categoria}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Paginación */}
       <div className="paginacion">
