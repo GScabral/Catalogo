@@ -37,7 +37,7 @@ const ListaProductos = () => {
 
   return (
     <div className="catalogo">
-      <h1 className="titulo">Catálogo de Productos</h1>
+      <h1 className="titulo">CATÁLOGO MAYORISTA - Amore Mio </h1>
 
       {/* Filtro por categoría */}
       <div className="filtro-categoria">
