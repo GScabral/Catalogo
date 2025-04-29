@@ -25,10 +25,10 @@ router.get("/listaProducto", async (req, res) => {
 // Aquí le dices que primero pase por multer para procesar la imagen
 router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
     try {
-        const { nombre, descripcion, precio, cantidad } = req.body;
+        const { nombre, descripcion, precio, cantidad ,categoria} = req.body;
         const imagen_url = req.file ? req.file.path : null; // Aquí req.file.path trae la URL pública de Cloudinary
 
-        const data = { nombre, descripcion, precio, cantidad, imagen_url };
+        const data = { nombre, descripcion, precio, cantidad,categoria, imagen_url };
 
         const result = await createProducto(data);
 

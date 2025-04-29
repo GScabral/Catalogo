@@ -11,6 +11,7 @@ const CreateProductForm = () => {
     const [formData, setFormData] = useState({
         nombre: "",
         descripcion: "",
+        categoria:"",
         precio: "",
         cantidad: ""
     });
@@ -34,6 +35,7 @@ const CreateProductForm = () => {
         const data = new FormData();
         data.append('nombre', formData.nombre);
         data.append('descripcion', formData.descripcion);
+        data.append('categoria', formData.categoria);
         data.append('precio', formData.precio);
         data.append('cantidad', formData.cantidad);
         if (file) {
@@ -47,6 +49,7 @@ const CreateProductForm = () => {
             setFormData({
                 nombre: "",
                 descripcion: "",
+                categoria: "",
                 precio: "",
                 cantidad: ""
             });
@@ -75,6 +78,15 @@ const CreateProductForm = () => {
                     <textarea
                         name="descripcion"
                         value={formData.descripcion}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Categoria:</label>
+                    <textarea
+                        name="categoria"
+                        value={formData.categoria}
                         onChange={handleChange}
                         required
                     />

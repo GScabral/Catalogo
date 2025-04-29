@@ -4,7 +4,7 @@ const  {productos:Producto}=require('../db')
 
 const createProducto= async(data)=>{
     try{
-        const { nombre, descripcion, precio, cantidad, imagen_url } = data; // CORREGIDO: también cantidad e imagen_url
+        const { nombre, descripcion, precio, cantidad,categoria, imagen_url } = data; // CORREGIDO: también cantidad e imagen_url
 
 
 
@@ -13,6 +13,7 @@ const createProducto= async(data)=>{
         descripcion,
         precio,
         cantidad,
+        categoria,
         imagen_url,
     })
 

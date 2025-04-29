@@ -1,8 +1,10 @@
 /* Estilos generales */
 body {
-  background-color: #f9f6f1; /* Beige muy claro */
+  background-color: #f9f6f1;
+  /* Beige muy claro */
   font-family: 'Georgia', 'Times New Roman', serif;
-  color: #5c4033; /* Marrón suave */
+  color: #5c4033;
+  /* Marrón suave */
   margin: 0;
   padding: 0;
 }
@@ -78,6 +80,38 @@ body {
 .detalle {
   font-size: 0.9rem;
   color: #7d5a50;
+}
+
+.filtro-categoria {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.filtro-categoria select {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.paginacion {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.paginacion button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 5px;
+}
+
+.paginacion button.activo {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
 }
 
 /* Responsive para móvil y tablet */

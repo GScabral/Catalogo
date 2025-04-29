@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductos } from './redux/action';
 import './listaProductos.css';
@@ -11,43 +11,86 @@ const ListaProductos = () => {
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
 
-  // Llama a la acción para obtener productos al montar
+  // Estados locales
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 6;
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas');
+
+  // Llamada a la API
   useEffect(() => {
     dispatch(getProductos());
   }, [dispatch]);
 
-  console.log(allProductos)
+  // Categorías únicas para el filtro
+  const categoriasUnicas = ['Todas', ...new Set(allProductos.map(p => p.categoria))];
+
+  // Filtrar productos por categoría
+  const productosFiltrados = allProductos.filter(producto =>
+    categoriaSeleccionada === 'Todas' || producto.categoria === categoriaSeleccionada
+  );
+
+  // Paginación
+  const indiceUltimoProducto = paginaActual * productosPorPagina;
+  const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+  const productosActuales = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
 
   return (
     <div className="catalogo">
       <h1 className="titulo">Catálogo de Productos</h1>
 
+      {/* Filtro por categoría */}
+      <div className="filtro-categoria">
+        <label>Filtrar por categoría: </label>
+        <select
+          value={categoriaSeleccionada}
+          onChange={(e) => {
+            setCategoriaSeleccionada(e.target.value);
+            setPaginaActual(1); // Reinicia a la página 1
+          }}
+        >
+          {categoriasUnicas.map((cat, i) => (
+            <option key={i} value={cat}>{cat}</option>
+          ))}
+        </select>
+      </div>
+
       {loading && <p>Cargando productos...</p>}
       {error && <p>Error al cargar productos: {error}</p>}
-      {allProductos.length === 0 && !loading && <p>No hay productos disponibles.</p>}
+      {productosFiltrados.length === 0 && !loading && <p>No hay productos disponibles.</p>}
 
-      {allProductos.map((producto) => (
+      {productosActuales.map((producto) => (
         <div className="producto" key={producto.id}>
-          {/* Imagen del producto */}
           <img
             src={producto.imagen_url}
             alt={producto.nombre}
             className="producto-imagen"
           />
-
-          {/* Información del producto */}
           <div className="producto-info">
-            <h4>identificador:{producto.id}</h4>
+            <h4>Identificador: {producto.id}</h4>
             <h3>{producto.nombre}</h3>
             <p className="descripcion">{producto.descripcion}</p>
             <p className="detalle">Cantidad: {producto.cantidad}</p>
             <p className="detalle">Precio: ${producto.precio}</p>
-
+            <p className="detalle">Categoría: {producto.categoria}</p>
           </div>
         </div>
       ))}
+
+      {/* Paginación */}
+      <div className="paginacion">
+        {Array.from({ length: totalPaginas }, (_, index) => (
+          <button
+            key={index + 1}
+            className={paginaActual === index + 1 ? 'activo' : ''}
+            onClick={() => setPaginaActual(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default ListaProductos;
