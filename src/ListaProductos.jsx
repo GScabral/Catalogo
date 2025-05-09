@@ -26,6 +26,7 @@ const ListaProductos = () => {
 
   // Filtrar productos por categoría
   const productosFiltrados = allProductos.filter(producto =>
+    producto.cantidad > 0 &&
     categoriaSeleccionada === 'Todas' || producto.categoria === categoriaSeleccionada
   );
 
