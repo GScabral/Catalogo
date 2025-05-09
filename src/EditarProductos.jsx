@@ -105,7 +105,11 @@ const EditProduct = () => {
                 <tbody>
                     {allProductos.map((producto) => (
                         <tr key={producto.id}>
-                            <td>{producto.imagen_url}</td>
+                            <td>{<img
+                                src={producto.imagen_url}
+                                alt={producto.nombre}
+                                className="producto-imagen"
+                            />}</td>
                             <td>{producto.id}</td>
                             <td>{producto.nombre}</td>
                             <td>{producto.precio}</td>
