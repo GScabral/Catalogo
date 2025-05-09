@@ -26,7 +26,6 @@ const ListaProductos = () => {
 
   // Filtrar productos por categoría
   const productosFiltrados = allProductos.filter(producto =>
-    producto.cantidad > 0 &&
     categoriaSeleccionada === 'Todas' || producto.categoria === categoriaSeleccionada
   );
 
@@ -59,7 +58,7 @@ const ListaProductos = () => {
       {loading && <p>Cargando productos...</p>}
       {error && <p>Error al cargar productos: {error}</p>}
       {productosFiltrados.length === 0 && !loading && <p>No hay productos disponibles.</p>}
-      <div  className="catalogo-grid">
+      <div className="catalogo-grid">
         {productosActuales.map((producto) => (
           <div className="producto" key={producto.id}>
             <img
@@ -71,8 +70,11 @@ const ListaProductos = () => {
               <h4>Identificador: {producto.id}</h4>
               <h3>{producto.nombre}</h3>
               <p className="descripcion">{producto.descripcion}</p>
-              <p className="detalle">Cantidad: {producto.cantidad}</p>
-              <p className="detalle">Precio: ${producto.precio}</p>
+              {producto.cantidad === 0 ? (
+                <p className="sin-stock">Sin stock</p>
+              ) : (
+                <p className="detalle">Cantidad: {producto.cantidad}</p>
+              )}              <p className="detalle">Precio: ${producto.precio}</p>
               <p className="detalle">Categoría: {producto.categoria}</p>
             </div>
           </div>
