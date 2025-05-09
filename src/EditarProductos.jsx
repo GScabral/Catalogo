@@ -93,6 +93,7 @@ const EditProduct = () => {
             <table className="product-table">
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Precio</th>
@@ -104,6 +105,7 @@ const EditProduct = () => {
                 <tbody>
                     {allProductos.map((producto) => (
                         <tr key={producto.id}>
+                            <td>{producto.imagen_url}</td>
                             <td>{producto.id}</td>
                             <td>{producto.nombre}</td>
                             <td>{producto.precio}</td>
