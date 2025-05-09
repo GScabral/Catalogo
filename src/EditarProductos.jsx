@@ -14,6 +14,7 @@ const EditProduct = () => {
     const [productData, setProductData] = useState({
         nombre: '',
         descripcion: '',
+        categoria: '',
         precio: '',
         cantidad: '',
         imagen_url: ''
@@ -33,6 +34,7 @@ const EditProduct = () => {
                 setProductData({
                     nombre: product.nombre || '',
                     descripcion: product.descripcion || '',
+                    categoria: product.categoria || '',
                     precio: product.precio || '',
                     cantidad: product.cantidad || '',
                     imagen_url: product.imagen_url || ''
@@ -62,6 +64,7 @@ const EditProduct = () => {
             setProductData({
                 nombre: '',
                 descripcion: '',
+                categoria: '',
                 precio: '',
                 cantidad: '',
                 imagen_url: ''
@@ -93,6 +96,7 @@ const EditProduct = () => {
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Precio</th>
+                        <th>Categoria</th>
                         <th>Cantidad</th>
                         <th>Acciones</th>
                     </tr>
@@ -103,6 +107,7 @@ const EditProduct = () => {
                             <td>{producto.id}</td>
                             <td>{producto.nombre}</td>
                             <td>{producto.precio}</td>
+                            <td>{producto.categoria}</td>
                             <td>{producto.cantidad}</td>
                             <td>
                                 <button onClick={() => handleSelectProduct(producto.id)}>
@@ -139,6 +144,14 @@ const EditProduct = () => {
                             placeholder="Precio"
                             value={productData.precio}
                             onChange={handleChange}
+                        />
+                        <input
+                            type="text"
+                            name="categoria"
+                            placeholder="Categoria"
+                            value={productData.categoria}
+                            onChange={handleChange}
+                            required
                         />
                         <input
                             type="number"
