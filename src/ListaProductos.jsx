@@ -64,7 +64,7 @@ const ListaProductos = () => {
             <img
               src={producto.imagen_url}
               alt={producto.nombre}
-              className="producto-imagen"
+              className="producto-imagenlist"
             />
             <div className="producto-info">
               <h4>Identificador: {producto.id}</h4>
