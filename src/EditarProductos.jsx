@@ -53,7 +53,7 @@ const EditProduct = () => {
     const handleDeleteProduct = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
             try {
-                await dispatch(deleteProducto(id));
+                await dispatch(DeleteProducto(id));
                 alert('Producto eliminado correctamente');
                 dispatch(getProductos()); // Refrescar la lista de productos
             } catch (err) {
