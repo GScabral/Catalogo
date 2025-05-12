@@ -79,8 +79,9 @@ const ListaProductos = () => {
               <a
                 className="boton-whatsapp"
                 href={`https://wa.me/543794155821?text=${encodeURIComponent(
-                  `Hola, me interesa este producto:\n\nNombre: ${producto.nombre}\nPrecio: $${producto.precio}\nImagen: ${producto.imagen_url}`
+                  `¡Hola! 👋\n\nEstoy interesado en este producto y me gustaría más información:\n\n🛍️ *Nombre:* ${producto.nombre}\n💰 *Precio:* $${producto.precio}\n🖼️ *Imagen:* ${producto.imagen_url}\n\n¿Está disponible?\nGracias de antemano.`
                 )}`}
+
                 target="_blank"
                 rel="noopener noreferrer"
               >
