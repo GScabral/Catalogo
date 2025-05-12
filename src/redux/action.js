@@ -15,6 +15,12 @@ export const PATCH_PRODUCTOS_SUCCESS = 'PATCH_PRODUCTOS_SUCCESS';
 export const PATCH_PRODUCTOS_FAILURE = 'PATCH_PRODUCTOS_FAILURE';
 
 
+
+
+export const DELETE_PRODUCTO_SUCCESS = 'DELETE_PRODUCTO_SUCCESS';
+export const DELETE_PRODUCTO_FAILURE = 'DELETE_PRODUCTO_FAILURE';
+
+
 export const getProductos = () => async (dispatch) => {
     dispatch({ type: GET_PRODUCOTOS_REQUEST })
 
@@ -78,4 +84,20 @@ export const EditProductAction = (id, producto) => async (dispatch) => {
         });
     }
 };
+
+
+export const DeleteProducto = (id) => async (dispatch) => {
+    try {
+        const response = await axios.delete(`https://catalogo-d1xv.onrender.com/productos/eliminarProducto/${id}`)
+        dispatch({
+            type:DELETE_PRODUCTO_SUCCESS,
+            payload:response.data
+        })
+    }catch(error){
+        dispatch({
+            type:DELETE_PRODUCTO_FAILURE,
+            payload:error.message
+        })
+    }
+}
 

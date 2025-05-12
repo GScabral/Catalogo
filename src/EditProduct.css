@@ -12,7 +12,8 @@
   margin-bottom: 30px;
 }
 
-.product-table th, .product-table td {
+.product-table th,
+.product-table td {
   padding: 12px;
   border: 1px solid #ddd;
   text-align: center;
@@ -84,6 +85,19 @@
   margin-bottom: 10px;
 }
 
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .producto-imagen {
@@ -91,7 +105,8 @@
     height: 50px;
   }
 
-  .product-table td, .product-table th {
+  .product-table td,
+  .product-table th {
     padding: 8px;
   }
 

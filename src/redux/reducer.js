@@ -62,6 +62,14 @@ const reducer = (state = intialState, action) => {
                 loading: false,
                 error: action.payload,
             };
+
+        case 'DELETE_PRODUCT_SUCCESS':
+            return {
+                ...state,
+                allProductos: state.allProductos.filter(
+                    (producto) => producto.id !== action.payload
+                ),
+            };
         default:
             return state;
     }

@@ -3,6 +3,7 @@ const { Router } = require("express")
 const createProducto = require("../controller/newProducto")
 const editProducto = require("../controller/editProduto")
 const getProducto = require("../controller/getProduto")
+const deleteProducto=require("../controller/deleteProducto")
 const upload = require("../upload.js")
 
 const router = Router();
@@ -51,6 +52,18 @@ router.patch("/actualizarProducto/:id", async (req, res) => {
     } catch (error) {
         console.error("error al cambiar;", error)
         res.status(500).json({ error: "error al cambiar el producto" })
+    }
+})
+
+
+router.delete("/eliminarProducto/:id",async(req,res)=>{
+    try{
+        const id=req.params.id
+        const productoEliminado=await deleteProducto(id)
+        res.status(200).json(productoEliminado)
+    }catch(error){
+        console.error("error al eliminar producto:",error.message)
+        res.status(500).json({error:"error interno del servidor "})
     }
 })
 

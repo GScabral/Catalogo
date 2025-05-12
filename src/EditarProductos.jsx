@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductos, EditProductAction } from './redux/action';
+import { getProductos, EditProductAction, DeleteProducto } from './redux/action';
 import "./EditProduct.css";
 
 const EditProduct = () => {
@@ -48,6 +48,19 @@ const EditProduct = () => {
             ...productData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleDeleteProduct = async (id) => {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+            try {
+                await dispatch(deleteProducto(id));
+                alert('Producto eliminado correctamente');
+                dispatch(getProductos()); // Refrescar la lista de productos
+            } catch (err) {
+                console.error('Error al eliminar producto:', err);
+                alert('Hubo un error al eliminar el producto. Inténtalo de nuevo.');
+            }
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -118,6 +131,12 @@ const EditProduct = () => {
                             <td>
                                 <button onClick={() => handleSelectProduct(producto.id)}>
                                     Editar
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteProduct(producto.id)}
+                                    className="delete-button"
+                                >
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>
