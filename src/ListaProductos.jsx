@@ -78,7 +78,7 @@ const ListaProductos = () => {
               <p className="detalle">Categoría: {producto.categoria}</p>
               <a
                 className="boton-whatsapp"
-                href={`https://wa.me/543794969696?text=${encodeURIComponent(
+                href={`https://wa.me/543794155821?text=${encodeURIComponent(
                   `Hola, me interesa este producto:\n\nNombre: ${producto.nombre}\nPrecio: $${producto.precio}\nImagen: ${producto.imagen_url}`
                 )}`}
                 target="_blank"
