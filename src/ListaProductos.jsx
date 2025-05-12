@@ -76,6 +76,17 @@ const ListaProductos = () => {
                 <p className="detalle">Cantidad: {producto.cantidad}</p>
               )}              <p className="detalle">Precio: ${producto.precio}</p>
               <p className="detalle">Categoría: {producto.categoria}</p>
+              <a
+                className="boton-whatsapp"
+                href={`https://wa.me/543794969696?text=${encodeURIComponent(
+                  `Hola, me interesa este producto:\n\nNombre: ${producto.nombre}\nPrecio: $${producto.precio}\nImagen: ${producto.imagen_url}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Consultar por WhatsApp
+              </a>
+
             </div>
           </div>
         ))}

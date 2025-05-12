@@ -148,3 +148,19 @@ body {
   color: red;
   font-weight: bold;
 }
+
+.boton-whatsapp {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #25d366;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.boton-whatsapp:hover {
+  background-color: #1ebe5b;
+}
