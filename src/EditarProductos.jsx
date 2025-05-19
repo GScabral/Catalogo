@@ -91,29 +91,21 @@ const EditProduct = () => {
         setUpdating(true);
 
         try {
-            let imagenUrl = productData.imagen_url;
-
-            // Si hay un archivo nuevo, subirlo a Cloudinary
+            const formData = new FormData();
+            formData.append('nombre', productData.nombre);
+            formData.append('descripcion', productData.descripcion);
+            formData.append('categoria', productData.categoria);
+            formData.append('precio', productData.precio);
+            formData.append('cantidad', productData.cantidad);
+            // Si hay imagen nueva, la agregamos
             if (file) {
-                const formData = new FormData();
-                formData.append("file", file);
-                formData.append("upload_preset", "tu_upload_preset"); // Cambia esto por tu preset de Cloudinary
-
-                const res = await fetch("https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                const data = await res.json();
-                imagenUrl = data.secure_url;
+                formData.append('imagen', file);
+            } else {
+                // Si no hay imagen nueva, mandamos la url actual
+                formData.append('imagen_url', productData.imagen_url);
             }
 
-            // Preparar los datos para enviar
-            const updatedData = {
-                ...productData,
-                imagen_url: imagenUrl
-            };
-
-            await dispatch(EditProductAction(selectedProductId, updatedData));
+            await dispatch(EditProductAction(selectedProductId, formData));
             setSuccess(true);
             setSelectedProductId(null);
             setProductData({
@@ -125,7 +117,7 @@ const EditProduct = () => {
                 imagen_url: ''
             });
             setFile(null);
-            dispatch(getProductos()); // Refrescar lista
+            dispatch(getProductos());
         } catch (err) {
             console.error('Error al actualizar producto:', err);
             alert('Hubo un error al actualizar el producto. Inténtalo de nuevo.');

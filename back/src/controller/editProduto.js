@@ -3,13 +3,20 @@ const { productos: Producto } = require('../db')
 
 
 
-const actualizarProducto = async (id, data) => {
+const actualizarProducto = async (id, data, file) => {
     if (!data) throw new Error('No se enviaron datos para actualizar');
 
-    const { nombre, precio, descripcion, imagen_url, cantidad,categoria } = data;
+    const { nombre, precio, descripcion, cantidad, categoria } = data;
 
     const producto = await Producto.findByPk(id);
     if (!producto) throw new Error('Producto no encontrado');
+
+    // Si hay archivo, súbelo a Cloudinary
+    let imagen_url = data.imagen_url;
+    if (file) {
+        const result = await cloudinary.uploader.upload(file.path);
+        imagen_url = result.secure_url;
+    }
 
     // Actualiza solo los campos enviados
     if (nombre !== undefined) producto.nombre = nombre;
@@ -24,5 +31,6 @@ const actualizarProducto = async (id, data) => {
     return producto;
 };
 
-
 module.exports = actualizarProducto;
+
+

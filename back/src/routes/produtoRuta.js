@@ -42,18 +42,20 @@ router.post("/ingresarProducto", upload.single('imagen'), async (req, res) => {
 
 
 
-router.patch("/actualizarProducto/:id", async (req, res) => {
+router.patch("/actualizarProducto/:id", upload.single('imagen'), async (req, res) => {
     try {
         const id = req.params.id;
         const data = req.body;
+        // Si hay archivo, pásalo también al controller
+        const file = req.file;
 
-        const productoActualizado = await editProducto(id, data)
+        const productoActualizado = await editProducto(id, data, file);
         res.status(200).json(productoActualizado);
     } catch (error) {
         console.error("error al cambiar;", error)
         res.status(500).json({ error: "error al cambiar el producto" })
     }
-})
+});
 
 
 router.delete("/eliminarProducto/:id",async(req,res)=>{
