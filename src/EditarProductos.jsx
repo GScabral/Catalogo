@@ -44,11 +44,36 @@ const EditProduct = () => {
     }, [selectedProductId, allProductos]);
 
     const handleChange = (e) => {
-        setProductData({
-            ...productData,
-            [e.target.name]: e.target.value
-        });
+        if (e.target.name === "imagen_url" && e.target.files && e.target.files[0]) {
+            // Subir la imagen al servidor o servicio externo
+            const file = e.target.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Ejemplo usando Cloudinary (ajusta la URL y el preset según tu configuración)
+            fetch("https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload", {
+                method: "POST",
+                body: formData,
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setProductData({
+                        ...productData,
+                        imagen_url: data.secure_url // URL de la imagen subida
+                    });
+                })
+                .catch(err => {
+                    alert("Error al subir la imagen");
+                    console.error(err);
+                });
+        } else {
+            setProductData({
+                ...productData,
+                [e.target.name]: e.target.value
+            });
+        }
     };
+
 
     const handleDeleteProduct = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
@@ -186,10 +211,9 @@ const EditProduct = () => {
                             onChange={handleChange}
                         />
                         <input
-                            type="text"
+                            type="file"
                             name="imagen_url"
                             placeholder="URL de la imagen"
-                            value={productData.imagen_url}
                             onChange={handleChange}
                         />
                         <button type="submit" disabled={updating}>
