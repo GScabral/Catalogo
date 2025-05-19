@@ -21,6 +21,10 @@ const ListaProductos = () => {
     dispatch(getProductos());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [paginaActual]);
+
   // Categorías únicas para el filtro
   const categoriasUnicas = ['Todas', ...new Set(allProductos.map(p => p.categoria))];
 
