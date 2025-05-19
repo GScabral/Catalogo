@@ -1,7 +1,13 @@
 const { productos: Producto } = require('../db')
 
 
+const cloudinary = require('cloudinary').v2;
 
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const actualizarProducto = async (id, data, file) => {
     if (!data) throw new Error('No se enviaron datos para actualizar');
