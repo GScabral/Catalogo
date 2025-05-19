@@ -19,6 +19,7 @@ const EditProduct = () => {
         cantidad: '',
         imagen_url: ''
     });
+    const [file, setFile] = useState(null);
     const [success, setSuccess] = useState(false);
     const [updating, setUpdating] = useState(false);
 
@@ -39,38 +40,31 @@ const EditProduct = () => {
                     cantidad: product.cantidad || '',
                     imagen_url: product.imagen_url || ''
                 });
+                setFile(null);
             }
         }
     }, [selectedProductId, allProductos]);
 
     const handleChange = (e) => {
-        if (e.target.name === "imagen_url" && e.target.files && e.target.files[0]) {
-            // Subir la imagen al servidor o servicio externo
-            const file = e.target.files[0];
-            const formData = new FormData();
-            formData.append("file", file);
+        const { name, value } = e.target;
+        setProductData({
+            ...productData,
+            [name]: value
+        });
+    };
 
-            // Ejemplo usando Cloudinary (ajusta la URL y el preset según tu configuración)
-            fetch("https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload", {
-                method: "POST",
-                body: formData,
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setProductData({
-                        ...productData,
-                        imagen_url: data.secure_url // URL de la imagen subida
-                    });
-                })
-                .catch(err => {
-                    alert("Error al subir la imagen");
-                    console.error(err);
-                });
-        } else {
-            setProductData({
-                ...productData,
-                [e.target.name]: e.target.value
-            });
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0]);
+            // Vista previa inmediata (opcional)
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                setProductData(prev => ({
+                    ...prev,
+                    imagen_url: ev.target.result
+                }));
+            };
+            reader.readAsDataURL(e.target.files[0]);
         }
     };
 
@@ -95,8 +89,31 @@ const EditProduct = () => {
             return;
         }
         setUpdating(true);
+
         try {
-            await dispatch(EditProductAction(selectedProductId, productData));
+            let imagenUrl = productData.imagen_url;
+
+            // Si hay un archivo nuevo, subirlo a Cloudinary
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("upload_preset", "tu_upload_preset"); // Cambia esto por tu preset de Cloudinary
+
+                const res = await fetch("https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+                const data = await res.json();
+                imagenUrl = data.secure_url;
+            }
+
+            // Preparar los datos para enviar
+            const updatedData = {
+                ...productData,
+                imagen_url: imagenUrl
+            };
+
+            await dispatch(EditProductAction(selectedProductId, updatedData));
             setSuccess(true);
             setSelectedProductId(null);
             setProductData({
@@ -107,6 +124,7 @@ const EditProduct = () => {
                 cantidad: '',
                 imagen_url: ''
             });
+            setFile(null);
             dispatch(getProductos()); // Refrescar lista
         } catch (err) {
             console.error('Error al actualizar producto:', err);
@@ -210,12 +228,21 @@ const EditProduct = () => {
                             value={productData.cantidad}
                             onChange={handleChange}
                         />
-                        <input
-                            type="file"
-                            name="imagen_url"
-                            placeholder="URL de la imagen"
-                            onChange={handleChange}
-                        />
+                        <div>
+                            <label>Imagen del producto:</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+                            {productData.imagen_url && (
+                                <img
+                                    src={productData.imagen_url}
+                                    alt="Vista previa"
+                                    style={{ maxWidth: 100, marginTop: 10 }}
+                                />
+                            )}
+                        </div>
                         <button type="submit" disabled={updating}>
                             {updating ? 'Guardando...' : 'Guardar Cambios'}
                         </button>
